@@ -25,12 +25,29 @@ export const TransactionProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const addTransaction = (transaction) => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
+    axios
+      .post(`${endpoint}/transactions/add`, transaction, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      })
+      .then((res) => {
+        getUserTransactionData();
+        return res;
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <TransactionContext.Provider
       value={{
         transactions,
         setTransactions,
         getUserTransactionData,
+        addTransaction,
       }}
     >
       {children}
