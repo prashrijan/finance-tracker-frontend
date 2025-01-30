@@ -96,6 +96,14 @@ const TransactionsPage = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      await getUserTransactionData();
+    };
+
+    fetchTransactions();
+  }, [getUserTransactionData]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,

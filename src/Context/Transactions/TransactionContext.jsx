@@ -98,7 +98,7 @@ export const TransactionProvider = ({ children }) => {
         headers: {
           Authorization: `${accessToken}`,
         },
-        data: { transactions: transactionIds }, // Send data in the `data` property
+        data: { transactions: transactionIds },
       })
       .then((res) => {
         console.log(res);
