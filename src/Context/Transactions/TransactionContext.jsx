@@ -36,11 +36,17 @@ export const TransactionProvider = ({ children }) => {
         },
       })
       .then((res) => {
-        toast.success("Transaction added successfully.", {
-          autoClose: 2500,
-          pauseOnHover: false,
-        });
-        getUserTransactionData();
+        console.log(res);
+        if (res.status == 201) {
+          console.log("Toast called");
+          toast.success("Transaction added successfully.", {
+            autoClose: 2500,
+            pauseOnHover: false,
+          });
+          console.log("Toast executed");
+          getUserTransactionData();
+          console.log("Data fetched");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -61,10 +67,14 @@ export const TransactionProvider = ({ children }) => {
         },
       })
       .then((res) => {
-        toast.success("Transaction deleted successfully.", {
-          autoClose: 2500,
-          pauseOnHover: false,
-        });
+        console.log(res);
+        if (res.status == 200) {
+          console.log("i am here");
+          toast.success("Transaction deleted successfully.", {
+            autoClose: 2500,
+            pauseOnHover: false,
+          });
+        }
         setTransactions((prevTransactions) =>
           prevTransactions.filter(
             (transaction) => transaction._id !== transactionId
@@ -91,10 +101,13 @@ export const TransactionProvider = ({ children }) => {
         data: { transactions: transactionIds }, // Send data in the `data` property
       })
       .then((res) => {
-        toast.success("Transactions deleted successfully.", {
-          autoClose: 2500,
-          pauseOnHover: false,
-        });
+        console.log(res);
+        if (res.status == 200) {
+          toast.success("Transactions deleted successfully.", {
+            autoClose: 2500,
+            pauseOnHover: false,
+          });
+        }
         setTransactions((prev) =>
           prev.filter(
             (transaction) => !transactionIds.includes(transaction._id)
