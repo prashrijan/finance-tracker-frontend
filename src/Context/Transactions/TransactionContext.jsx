@@ -126,4 +126,6 @@ export const TransactionProvider = ({ children }) => {
   );
 };
 
-export const useTransaction = () => useContext(TransactionContext);
+export const useTransaction = () => {
+  return useContext(TransactionContext);
+};

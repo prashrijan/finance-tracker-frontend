@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useTransaction } from "../../Context/Transactions/TransactionContext";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const TransactionsPage = () => {
@@ -12,7 +12,6 @@ const TransactionsPage = () => {
     addTransaction,
     getUserTransactionData,
     removeTransaction,
-    setTransactions,
     removeManyTransactions,
   } = useTransaction();
 
@@ -292,7 +291,18 @@ const TransactionsPage = () => {
           </div>
         )}
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
