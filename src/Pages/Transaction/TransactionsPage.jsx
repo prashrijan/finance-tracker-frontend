@@ -11,8 +11,8 @@ const TransactionsPage = () => {
     transactions,
     addTransaction,
     getUserTransactionData,
-    removeTransaction,
-    removeManyTransactions,
+    deleteTransaction,
+    deleteMultipleTransactions,
   } = useTransaction();
 
   const [errors, setErrors] = useState({});
@@ -53,10 +53,6 @@ const TransactionsPage = () => {
     );
   }, [selectedTransactions, transactions]);
 
-  useEffect(() => {
-    getUserTransactionData();
-  }, []);
-
   const transactionValidationSchema = Yup.object({
     type: Yup.string().required("Type is required."),
     amount: Yup.number()
@@ -81,7 +77,8 @@ const TransactionsPage = () => {
         abortEarly: false,
       });
 
-      addTransaction(formData);
+      await addTransaction(formData);
+
       setErrors({});
       setFormData({
         type: "Income",
@@ -104,14 +101,6 @@ const TransactionsPage = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const deleteTransaction = (id) => {
-    removeTransaction(id);
-  };
-
-  const deleteTransactions = (ids) => {
-    removeManyTransactions(ids);
   };
 
   return (
@@ -207,7 +196,7 @@ const TransactionsPage = () => {
           {selectedTransactions.length > 0 && (
             <button
               onClick={() => {
-                removeManyTransactions(selectedTransactions);
+                deleteMultipleTransactions(selectedTransactions);
                 setSelectedTransactions([]);
               }}
               className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition"

@@ -26,7 +26,7 @@ export const TransactionProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const addTransaction = (transaction) => {
+  const addTransaction = async (transaction) => {
     const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
     axios
@@ -51,7 +51,7 @@ export const TransactionProvider = ({ children }) => {
       });
   };
 
-  const removeTransaction = (transactionId) => {
+  const deleteTransaction = (transactionId) => {
     const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
     axios
@@ -80,7 +80,7 @@ export const TransactionProvider = ({ children }) => {
       });
   };
 
-  const removeManyTransactions = (transactionIds) => {
+  const deleteMultipleTransactions = (transactionIds) => {
     const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
     axios
@@ -117,8 +117,8 @@ export const TransactionProvider = ({ children }) => {
         setTransactions,
         getUserTransactionData,
         addTransaction,
-        removeTransaction,
-        removeManyTransactions,
+        deleteTransaction,
+        deleteMultipleTransactions,
       }}
     >
       {children}
@@ -126,6 +126,4 @@ export const TransactionProvider = ({ children }) => {
   );
 };
 
-export const useTransaction = () => {
-  return useContext(TransactionContext);
-};
+export const useTransaction = () => useContext(TransactionContext);
