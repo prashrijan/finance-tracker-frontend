@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 const TransactionContext = React.createContext();
 
@@ -19,7 +20,7 @@ export const TransactionProvider = ({ children }) => {
       .then((res) => {
         const newTransactions = res.data?.data;
         if (JSON.stringify(newTransactions) !== JSON.stringify(transactions)) {
-          setTransactions(res.data?.data);
+          setTransactions(newTransactions);
         }
       })
       .catch((err) => console.log(err));
@@ -35,10 +36,78 @@ export const TransactionProvider = ({ children }) => {
         },
       })
       .then((res) => {
+        toast.success("Transaction added successfully.", {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
         getUserTransactionData();
-        return res;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error("Failed to add transaction. Please try again.", {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
+      });
+  };
+
+  const removeTransaction = (transactionId) => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
+    axios
+      .delete(`${endpoint}/transactions/delete/${transactionId}`, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      })
+      .then((res) => {
+        toast.success("Transaction deleted successfully.", {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
+        setTransactions((prevTransactions) =>
+          prevTransactions.filter(
+            (transaction) => transaction._id !== transactionId
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Failed to delete transaction. Please try again.", {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
+      });
+  };
+
+  const removeManyTransactions = (transactionIds) => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
+    axios
+      .delete(`${endpoint}/transactions/delete`, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+        data: { transactions: transactionIds }, // Send data in the `data` property
+      })
+      .then((res) => {
+        toast.success("Transactions deleted successfully.", {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
+        setTransactions((prev) =>
+          prev.filter(
+            (transaction) => !transactionIds.includes(transaction._id)
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Failed to delete transactions. Please try again.", {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
+      });
   };
 
   return (
@@ -48,6 +117,8 @@ export const TransactionProvider = ({ children }) => {
         setTransactions,
         getUserTransactionData,
         addTransaction,
+        removeTransaction,
+        removeManyTransactions,
       }}
     >
       {children}

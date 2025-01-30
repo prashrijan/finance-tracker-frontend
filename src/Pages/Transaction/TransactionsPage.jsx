@@ -4,10 +4,17 @@ import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useTransaction } from "../../Context/Transactions/TransactionContext";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TransactionsPage = () => {
-  const { transactions, addTransaction, getUserTransactionData } =
-    useTransaction();
+  const {
+    transactions,
+    addTransaction,
+    getUserTransactionData,
+    removeTransaction,
+    setTransactions,
+    removeManyTransactions,
+  } = useTransaction();
 
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -75,12 +82,7 @@ const TransactionsPage = () => {
         abortEarly: false,
       });
 
-      await addTransaction(formData);
-      toast.success("Transaction added.", {
-        autoClose: 2500,
-        pauseOnHover: false,
-      });
-      getUserTransactionData();
+      addTransaction(formData);
       setErrors({});
       setFormData({
         type: "Income",
@@ -103,6 +105,14 @@ const TransactionsPage = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const deleteTransaction = (id) => {
+    removeTransaction(id);
+  };
+
+  const deleteTransactions = (ids) => {
+    removeManyTransactions(ids);
   };
 
   return (
@@ -143,6 +153,9 @@ const TransactionsPage = () => {
               placeholder="0.00"
               className="w-full bg-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-blue-500"
             />
+            {errors.amount && (
+              <span className="text-red-500 text-sm mt-1">{errors.amount}</span>
+            )}
           </div>
 
           {/* Date */}
@@ -155,6 +168,9 @@ const TransactionsPage = () => {
               onChange={handleChange}
               className="w-full bg-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-blue-500"
             />
+            {errors.date && (
+              <span className="text-red-500 text-sm mt-1">{errors.date}</span>
+            )}
           </div>
 
           {/* Description */}
@@ -168,6 +184,11 @@ const TransactionsPage = () => {
               className="w-full bg-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-blue-500"
               rows="3"
             />
+            {errors.description && (
+              <span className="text-red-500 text-sm mt-1">
+                {errors.description}
+              </span>
+            )}
           </div>
 
           {/* Submit Button */}
@@ -187,7 +208,7 @@ const TransactionsPage = () => {
           {selectedTransactions.length > 0 && (
             <button
               onClick={() => {
-                deleteTransaction(selectedTransactions);
+                removeManyTransactions(selectedTransactions);
                 setSelectedTransactions([]);
               }}
               className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition"
