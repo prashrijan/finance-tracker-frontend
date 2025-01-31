@@ -11,6 +11,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+import { useTransaction } from "../../Context/Transactions/TransactionContext";
 
 ChartJs.register(
   CategoryScale,
@@ -23,14 +24,33 @@ ChartJs.register(
   Filler
 );
 
-const ExpenseLineChart = ({ expense }) => {
+const ExpenseLineChart = () => {
+  const { transactions } = useTransaction();
+
+  const expenseTransaction = transactions.filter(
+    (transaction) => transaction.type == "Expense"
+  );
+
+  const expenseByDate = expenseTransaction.reduce((acc, transaction) => {
+    const date = new Date(transaction.date).toLocaleDateString();
+
+    if (!acc[date]) {
+      acc[date] = 0;
+    }
+
+    acc[date] = +transaction.amount;
+    return acc;
+  }, {});
+
+  const labels = Object.keys(expenseByDate);
+  const datePoints = Object.values(expenseByDate);
   const data = {
-    labels: "Expense",
+    labels,
     datasets: [
       {
-        label: "Expense ",
-        data: [expense],
-        fill: true,
+        label: "Expense",
+        data: datePoints,
+        fill: false,
         backgroundColor: "rgba(255, 99, 132, 0.6)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 2,

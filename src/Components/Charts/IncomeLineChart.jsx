@@ -11,6 +11,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+import { useTransaction } from "../../Context/Transactions/TransactionContext";
 
 ChartJs.register(
   CategoryScale,
@@ -23,17 +24,33 @@ ChartJs.register(
   Filler
 );
 
-const IncomeLineChart = ({ income }) => {
-  console.log(income);
+const IncomeLineChart = () => {
+  const { transactions } = useTransaction();
+
+  const incomeTransaction = transactions.filter(
+    (transactions) => transactions.type === "Income"
+  );
+
+  const incomeByDate = incomeTransaction.reduce((acc, transaction) => {
+    const date = new Date(transaction.date).toLocaleDateString();
+    if (!acc[date]) {
+      acc[date] = 0;
+    }
+    acc[date] += transaction.amount;
+    return acc;
+  }, {});
+
+  const labels = Object.keys(incomeByDate);
+  const dataPoints = Object.values(incomeByDate);
 
   // Use the `income` prop to generate data for the chart
   const data = {
-    labels: "Income",
+    labels,
     datasets: [
       {
         label: "Income",
-        data: [income],
-        fill: true,
+        data: dataPoints,
+        fill: false,
         backgroundColor: "rgba(75, 192, 132, 0.6)",
         borderColor: "rgba(75, 192, 132, 1)",
         borderWidth: 2,
