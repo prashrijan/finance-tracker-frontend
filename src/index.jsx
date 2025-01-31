@@ -8,6 +8,10 @@ import SignUp from "./Pages/Auth/SignUp";
 import Login from "./Pages/Auth/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import TransactionsPage from "./Pages/Transaction/TransactionsPage";
+import BarGraph from "./Components/Charts/BarGraph";
+import DoughnutChart from "./Components/Charts/Doughnut";
+import IncomeLineChart from "./Components/Charts/IncomeLineChart";
+import ExpenseLineChart from "./Components/Charts/ExpenseLineChart";
 
 export {
   HomePage,
@@ -20,4 +24,8 @@ export {
   Login,
   Dashboard,
   TransactionsPage,
+  BarGraph,
+  DoughnutChart,
+  IncomeLineChart,
+  ExpenseLineChart,
 };
