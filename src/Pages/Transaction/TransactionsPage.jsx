@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useTransaction } from "../../Context/Transactions/TransactionContext";
 import * as Yup from "yup";
-import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 const TransactionsPage = () => {
@@ -29,6 +29,7 @@ const TransactionsPage = () => {
   const handleSelectTransaction = (transactionId) => {
     setSelectedTransactions((prev) => {
       if (prev.includes(transactionId)) {
+        // if the id is already in the array remove it
         return prev.filter((id) => id !== transactionId);
       }
       return [...prev, transactionId];
@@ -38,8 +39,10 @@ const TransactionsPage = () => {
   // Handle select all/none
   const handleSelectAll = () => {
     if (selectAll) {
+      // empty the selected transactions when everything is selected
       setSelectedTransactions([]);
     } else {
+      // if the select all was empty then add the ids
       setSelectedTransactions(transactions.map((t) => t._id));
     }
     setSelectAll(!selectAll);

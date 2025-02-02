@@ -16,24 +16,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { useAuth } from "./Context/Auth/AuthContext";
-import { useTransaction } from "./Context/Transactions/TransactionContext";
 
 function App() {
   const [showContent, setShowContent] = useState(false);
 
-  const {
-    errors,
-    isLoggedIn,
-    loading,
-    registerUser,
-    loginUser,
-    handleLogout,
-    setErrors,
-    setIsLoggedIn,
-  } = useAuth();
-
-  const { getUserTransactionData, transactions, setTransactions } =
-    useTransaction();
+  const { isLoggedIn, loading } = useAuth();
 
   const ProtectedRoute = ({ children }) => {
     if (!isLoggedIn) {
@@ -45,25 +32,6 @@ function App() {
   const handleAnimationComplete = () => {
     setShowContent(true);
   };
-
-  // const getUserTransactionData = async () => {
-  //   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-
-  //   axios
-  //     .get(`${endpoint}/transactions`, {
-  //       headers: {
-  //         Authorization: `${accessToken}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setTransactions(res.data?.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // useEffect(() => {
-  //   getUserTransactionData();
-  // }, []);
 
   return (
     <div className="relative min-h-screen bg-gray-900 text-white flex">
