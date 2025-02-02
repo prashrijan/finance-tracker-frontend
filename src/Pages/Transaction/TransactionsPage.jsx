@@ -77,8 +77,9 @@ const TransactionsPage = () => {
         abortEarly: false,
       });
 
+      console.log("await adding transactions in handle submit");
       await addTransaction(formData);
-
+      console.log("added transactions");
       setErrors({});
       setFormData({
         type: "Income",
@@ -102,7 +103,7 @@ const TransactionsPage = () => {
     };
 
     fetchTransactions();
-  }, [getUserTransactionData]);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -288,18 +289,6 @@ const TransactionsPage = () => {
           </div>
         )}
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

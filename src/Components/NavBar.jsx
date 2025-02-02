@@ -74,6 +74,7 @@ const NavBar = () => {
                     isActive ? "text-blue-400 font-bold" : ""
                   }`
                 }
+                onClick={toggleMenu}
               >
                 Home
               </NavLink>
@@ -86,6 +87,7 @@ const NavBar = () => {
                     isActive ? "text-blue-400 font-bold" : ""
                   }`
                 }
+                onClick={toggleMenu}
               >
                 About
               </NavLink>
@@ -98,6 +100,7 @@ const NavBar = () => {
                     isActive ? "text-blue-400 font-bold" : ""
                   }`
                 }
+                onClick={toggleMenu}
               >
                 Contact
               </NavLink>
@@ -114,6 +117,7 @@ const NavBar = () => {
                         isActive ? "text-blue-400 font-bold" : ""
                       }`
                     }
+                    onClick={toggleMenu}
                   >
                     Transactions
                   </NavLink>
@@ -137,6 +141,7 @@ const NavBar = () => {
                         isActive ? "text-blue-400 font-bold" : ""
                       }`
                     }
+                    onClick={toggleMenu}
                   >
                     Login
                   </NavLink>
@@ -149,6 +154,7 @@ const NavBar = () => {
                         isActive ? "text-blue-400 font-bold" : ""
                       }`
                     }
+                    onClick={toggleMenu}
                   >
                     Sign Up
                   </NavLink>

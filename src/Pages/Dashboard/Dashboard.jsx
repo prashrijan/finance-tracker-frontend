@@ -22,7 +22,13 @@ const Dashboard = () => {
   const [expense, setExpense] = useState(0);
   const [userName, setUserName] = useState("" || "User");
 
-  useEffect(() => getUserTransactionData(), []);
+  const fetchTransactionData = async () => {
+    await getUserTransactionData();
+  };
+
+  useEffect(() => {
+    fetchTransactionData();
+  }, []);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));

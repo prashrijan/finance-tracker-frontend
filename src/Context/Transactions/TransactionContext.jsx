@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const TransactionContext = React.createContext();
@@ -8,22 +8,23 @@ export const TransactionProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const endpoint = import.meta.env.VITE_ENDPOINT;
 
-  const getUserTransactionData = () => {
+  const getUserTransactionData = async () => {
     const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
-    axios
-      .get(`${endpoint}/transactions`, {
+    try {
+      const res = await axios.get(`${endpoint}/transactions`, {
         headers: {
           Authorization: `${accessToken}`,
         },
-      })
-      .then((res) => {
-        const newTransactions = res.data?.data;
-        if (JSON.stringify(newTransactions) !== JSON.stringify(transactions)) {
-          setTransactions(newTransactions);
-        }
-      })
-      .catch((err) => console.log(err));
+      });
+
+      const newTransactions = res.data?.data || [];
+      if (JSON.stringify(newTransactions) !== JSON.stringify(transactions)) {
+        setTransactions(newTransactions);
+      }
+    } catch (error) {
+      console.log(`Error while fetching transactions: ${error}`);
+    }
   };
 
   const addTransaction = async (transaction) => {
@@ -35,7 +36,7 @@ export const TransactionProvider = ({ children }) => {
           Authorization: `${accessToken}`,
         },
       })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
         if (res.status == 201) {
           console.log("Toast called");
@@ -44,7 +45,7 @@ export const TransactionProvider = ({ children }) => {
             pauseOnHover: false,
           });
           console.log("Toast executed");
-          getUserTransactionData();
+          await getUserTransactionData();
           console.log("Data fetched");
         }
       })
