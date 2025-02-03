@@ -68,31 +68,38 @@ export const AuthProvider = ({ children }) => {
             autoClose: 2500,
             pauseOnHover: false,
           });
+          return;
         } else if (err.response && err.response.status === 401) {
           setErrors({
             ...errors,
             password: "Invalid password.",
             email: "",
           });
+          return;
         } else {
           setErrors({
             ...errors,
             email: "An error occurred. Please try again.",
             password: "",
           });
+          return;
         }
       });
   };
 
   //   logout user
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("username");
-    navigate("/login");
-    toast.success("Account logged out.", {
-      autoClose: 2500,
-      pauseOnHover: false,
-    });
+    setLoading(true);
+    try {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("username");
+      navigate("/login");
+      setLoading(false);
+      toast.success("Account logged out.", {
+        autoClose: 2500,
+        pauseOnHover: false,
+      });
+    } catch (error) {}
   };
 
   return (

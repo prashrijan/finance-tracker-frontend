@@ -6,9 +6,7 @@ import { useAuth } from "../../Context/Auth/AuthContext";
 
 const Login = () => {
   const { loginUser, errors, setErrors } = useAuth();
-  useEffect(() => {
-    setErrors({});
-  }, []);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
