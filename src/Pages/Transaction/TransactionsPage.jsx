@@ -26,6 +26,14 @@ const TransactionsPage = () => {
   const [selectedTransactionId, setSelectedTransactionId] = useState();
   const [selectAll, setSelectAll] = useState(false);
 
+  const toggleDescription = (transactionId) => {
+    setExpandedDescription((prev) =>
+      prev.includes(transactionId)
+        ? prev.filter((id) => id !== transactionId)
+        : [...prev, transactionId]
+    );
+  };
+
   // Handle individual checkbox selection
   const handleSelectTransaction = (transactionId) => {
     setSelectedTransactions((prev) => {
@@ -250,10 +258,10 @@ const TransactionsPage = () => {
               </p>
             ) : (
               <div className="overflow-x-auto">
-                <table className="min-w-full">
+                <table className="min-w-full ">
                   <thead>
                     <tr className="text-left border-b border-gray-700 text-sm md:text-base">
-                      <th className="pb-3">
+                      <th className="pb-3 px-3">
                         <label className="flex items-center space-x-2 cursor-pointer">
                           <input
                             type="checkbox"
@@ -264,11 +272,13 @@ const TransactionsPage = () => {
                           <span>Select All</span>
                         </label>
                       </th>
-                      <th className="pb-3">Date</th>
-                      <th className="pb-3">Description</th>
-                      <th className="pb-3">Type</th>
-                      <th className="pb-3">Amount</th>
-                      <th className="pb-3">Actions</th>
+                      <th className="pb-3 px-3 whitespace-nowrap">Date</th>
+                      <th className="pb-3 px-3 whitespace-nowrap">
+                        Description
+                      </th>
+                      <th className="pb-3 px-3 whitespace-nowrap">Type</th>
+                      <th className="pb-3 px-3 whitespace-nowrap">Amount</th>
+                      <th className="pb-3 px-3 whitespace-nowrap">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -277,7 +287,7 @@ const TransactionsPage = () => {
                         key={transaction._id}
                         className="border-b border-gray-700 hover:bg-gray-750 text-sm md:text-base"
                       >
-                        <td className="py-3">
+                        <td className="py-3 px-3">
                           <input
                             type="checkbox"
                             checked={selectedTransactions.includes(
@@ -289,12 +299,14 @@ const TransactionsPage = () => {
                             className="form-checkbox h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 rounded focus:ring-blue-500"
                           />
                         </td>
-                        <td className="py-3">
+                        <td className="py-3 px-3">
                           {new Date(transaction.date).toLocaleDateString()}
                         </td>
-                        <td className="py-3">{transaction.description}</td>
+                        <td className="py-3 px-3 ">
+                          {transaction.description}
+                        </td>
                         <td
-                          className={`py-3 ${
+                          className={`py-3 px-3 ${
                             transaction.type === "Income"
                               ? "text-green-500"
                               : "text-red-500"
@@ -302,10 +314,10 @@ const TransactionsPage = () => {
                         >
                           {transaction.type}
                         </td>
-                        <td className="py-3">
+                        <td className="py-3 px-3">
                           ${parseFloat(transaction.amount).toFixed(2)}
                         </td>
-                        <td className="py-3">
+                        <td className="py-3 px-3">
                           <button
                             onClick={() => openDeleteModal(transaction._id)}
                             className="text-red-500 hover:text-red-400"
