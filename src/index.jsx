@@ -12,6 +12,7 @@ import BarGraph from "./Components/Charts/BarGraph";
 import DoughnutChart from "./Components/Charts/Doughnut";
 import IncomeLineChart from "./Components/Charts/IncomeLineChart";
 import ExpenseLineChart from "./Components/Charts/ExpenseLineChart";
+import DeleteModal from "./Components/Modal/DeleteModal";
 
 export {
   HomePage,
@@ -28,4 +29,5 @@ export {
   DoughnutChart,
   IncomeLineChart,
   ExpenseLineChart,
+  DeleteModal,
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 const TransactionContext = React.createContext();
@@ -37,7 +37,6 @@ export const TransactionProvider = ({ children }) => {
         },
       })
       .then(async (res) => {
-        console.log(res);
         if (res.status == 201) {
           console.log("Toast called");
           toast.success("Transaction added successfully.", {
