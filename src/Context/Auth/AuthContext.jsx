@@ -58,12 +58,15 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((err) => {
         setLoading(false);
-
         if (err.response && err.response.status === 404) {
           setErrors({
             ...errors,
             email: "User with this email does not exist.",
             password: "",
+          });
+          toast.error("User doesnot exists.", {
+            autoClose: 2500,
+            pauseOnHover: false,
           });
         } else if (err.response && err.response.status === 401) {
           setErrors({

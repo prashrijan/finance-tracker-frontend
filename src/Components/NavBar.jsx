@@ -123,7 +123,10 @@ const NavBar = () => {
                 </li>
                 <li>
                   <button
-                    onClick={handleLogout}
+                    onClick={() => {
+                      handleLogout();
+                      toggleMenu();
+                    }}
                     className="block py-3 px-4 rounded hover:bg-red-700  md:hover:text-blue-400 transition-colors duration-200 bg-red-500"
                   >
                     Logout
