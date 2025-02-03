@@ -89,9 +89,7 @@ const TransactionsPage = () => {
         abortEarly: false,
       });
 
-      console.log("await adding transactions in handle submit");
       await addTransaction(formData);
-      console.log("added transactions");
       setErrors({});
       setFormData({
         type: "Income",

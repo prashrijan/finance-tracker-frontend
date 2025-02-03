@@ -27,7 +27,6 @@ export const AuthProvider = ({ children }) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         if (err.status === 409) {
           setErrors({
             ...errors,
@@ -45,7 +44,6 @@ export const AuthProvider = ({ children }) => {
     axios
       .post(`${endpoint}/users/login`, user)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem(
           "loggedInUser",
           JSON.stringify(res.data?.data?.user)

@@ -12,7 +12,6 @@ const NavBar = () => {
     try {
       accessToken ? setIsLoggedIn(true) : setIsLoggedIn(false);
     } catch (error) {
-      console.log(error);
       setIsLoggedIn(false);
     }
   }, [accessToken]);

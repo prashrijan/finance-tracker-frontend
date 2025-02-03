@@ -23,7 +23,10 @@ export const TransactionProvider = ({ children }) => {
         setTransactions(newTransactions);
       }
     } catch (error) {
-      console.log(`Error while fetching transactions: ${error}`);
+      toast.success("Error while fetching transactions.", {
+        autoClose: 2500,
+        pauseOnHover: false,
+      });
     }
   };
 
@@ -38,18 +41,14 @@ export const TransactionProvider = ({ children }) => {
       })
       .then(async (res) => {
         if (res.status == 201) {
-          console.log("Toast called");
           toast.success("Transaction added successfully.", {
             autoClose: 2500,
             pauseOnHover: false,
           });
-          console.log("Toast executed");
           await getUserTransactionData();
-          console.log("Data fetched");
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((_) => {
         toast.error("Failed to add transaction. Please try again.", {
           autoClose: 2500,
           pauseOnHover: false,
@@ -67,9 +66,7 @@ export const TransactionProvider = ({ children }) => {
         },
       })
       .then((res) => {
-        console.log(res);
         if (res.status == 200) {
-          console.log("i am here");
           toast.success("Transaction deleted successfully.", {
             autoClose: 2500,
             pauseOnHover: false,
@@ -81,8 +78,7 @@ export const TransactionProvider = ({ children }) => {
           )
         );
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((_) => {
         toast.error("Failed to delete transaction. Please try again.", {
           autoClose: 2500,
           pauseOnHover: false,
@@ -101,7 +97,6 @@ export const TransactionProvider = ({ children }) => {
         data: { transactions: transactionIds },
       })
       .then((res) => {
-        console.log(res);
         if (res.status == 200) {
           toast.success("Transactions deleted successfully.", {
             autoClose: 2500,
@@ -114,8 +109,7 @@ export const TransactionProvider = ({ children }) => {
           )
         );
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((_) => {
         toast.error("Failed to delete transactions. Please try again.", {
           autoClose: 2500,
           pauseOnHover: false,

@@ -73,10 +73,6 @@ const SignUp = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
   return (
     <div className="flex flex-col md:flex-row items-center justify-center h-full  bg-gray-900 text-white p-5 gap-4">
       {loading ? (
