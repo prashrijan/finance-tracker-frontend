@@ -4,9 +4,11 @@ import { SkeletonLoader } from "../../index";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../../Context/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { registerUser, errors, setErrors, loading } = useAuth();
+  let navigate = useNavigate();
 
   useEffect(() => {
     setErrors({});
@@ -62,6 +64,7 @@ const SignUp = () => {
         password: "",
         confirmPassword: "",
       });
+      navigate("/login");
     } catch (error) {
       const newErrors = {};
 
