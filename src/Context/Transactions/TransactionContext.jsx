@@ -22,8 +22,8 @@ export const TransactionProvider = ({ children }) => {
       if (JSON.stringify(newTransactions) !== JSON.stringify(transactions)) {
         setTransactions(newTransactions);
       }
-    } catch (error) {
-      toast.success("Error while fetching transactions.", {
+    } catch (_) {
+      toast.info("No transactions found.", {
         autoClose: 2500,
         pauseOnHover: false,
       });
