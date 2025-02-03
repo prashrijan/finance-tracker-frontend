@@ -13,6 +13,7 @@ import {
   IncomeLineChart,
   ExpenseLineChart,
 } from "../../index";
+import { getTotalIncome, getTotalExpense } from "../../Utils/totalGetter";
 
 const Dashboard = () => {
   const { getUserTransactionData, transactions } = useTransaction();
@@ -39,13 +40,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (transactions && transactions.length > 0) {
-      const income = transactions
-        .filter((transaction) => transaction.type == "Income")
-        .reduce((sum, transaction) => sum + transaction.amount, 0);
+      const income = getTotalIncome(transactions);
 
-      const expense = transactions
-        .filter((transaction) => transaction.type == "Expense")
-        .reduce((sum, transaction) => sum + transaction.amount, 0);
+      const expense = getTotalExpense(transactions);
 
       const balance = income - expense;
 

@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import DeleteModal from "../../Components/Modal/DeleteModal";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteAllModal from "../../Components/Modal/DeleteAllModal";
+import { getTotalExpense, getTotalIncome } from "../../Utils/totalGetter";
 
 const TransactionsPage = () => {
   const { transactions, addTransaction, getUserTransactionData } =
@@ -226,7 +227,7 @@ const TransactionsPage = () => {
             </form>
           </div>
 
-          <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
+          <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl md:text-2xl font-bold">
                 Recent Transactions
@@ -318,6 +319,15 @@ const TransactionsPage = () => {
                 </table>
               </div>
             )}
+          </div>
+
+          <div className="bg-gray-800 rounded-lg p-6 shadow-lg flex justify-around">
+            <div className="text-green-500">
+              Total Earned : ${getTotalIncome(transactions)}
+            </div>
+            <div className="text-red-500">
+              Total Spent: ${getTotalExpense(transactions)}
+            </div>
           </div>
         </>
       )}
