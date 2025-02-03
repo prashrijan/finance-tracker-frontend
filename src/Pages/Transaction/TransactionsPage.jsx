@@ -237,7 +237,7 @@ const TransactionsPage = () => {
                   onClick={() => {
                     openDeleteAllModal();
                   }}
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition text-md"
                 >
                   Delete Selected ({selectedTransactions.length})
                 </button>
@@ -250,7 +250,7 @@ const TransactionsPage = () => {
               </p>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="min-w-full">
                   <thead>
                     <tr className="text-left border-b border-gray-700 text-sm md:text-base">
                       <th className="pb-3">
