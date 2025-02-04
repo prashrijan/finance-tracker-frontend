@@ -2,6 +2,12 @@
 
 This is the frontend for the Finance Tracker application, a project developed at Dented Code Academy. The Finance Tracker helps users manage their personal finances by tracking income, expenses, and savings.
 
+## Backend Repository
+
+The backend for the Finance Tracker application can be found in the following repository:
+
+[Finance Tracker Backend](https://github.com/prashrijan/finance-tracker-backend)
+
 ## Table of Contents
 
 - [Installation](#installation)
