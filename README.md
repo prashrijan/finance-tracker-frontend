@@ -1,6 +1,6 @@
 # Finance Tracker Frontend
 
-This is the frontend application for the Finance Tracker project, developed as part of the Dented Code Academy Full Stack Project. The application allows users to track their financial transactions, manage budgets, and visualize their spending habits.
+This is the frontend for the Finance Tracker application, a project developed at Dented Code Academy. The Finance Tracker helps users manage their personal finances by tracking income, expenses, and savings.
 
 ## Table of Contents
 
@@ -12,13 +12,20 @@ This is the frontend application for the Finance Tracker project, developed as p
 
 ## Installation
 
-To get started with the project, clone the repository and install the necessary dependencies:
+To get started with the Finance Tracker frontend, follow these steps:
 
-```bash
-git clone https://github.com/yourusername/finance-tracker-frontend.git
-cd finance-tracker-frontend
-npm install
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/Finance-Tracker.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Finance-Tracker/ft-frontend
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
 ## Usage
 
@@ -28,26 +35,33 @@ To run the application locally, use the following command:
 npm start
 ```
 
-This will start the development server and you can view the application in your browser at `http://localhost:3000`.
+This will start the development server and open the application in your default web browser.
 
 ## Features
 
-- User authentication and authorization
-- Add, edit, and delete financial transactions
+- Track income and expenses
 - Categorize transactions
-- Budget management
-- Visualize spending with charts and graphs
+- Visualize financial data with charts
+- Set and monitor savings goals
 
 ## Contributing
 
-We welcome contributions to the project. To contribute, please follow these steps:
+We welcome contributions to the Finance Tracker project! To contribute, please follow these steps:
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some feature'`)
-5. Push to the branch (`git push origin feature-branch`)
-6. Open a pull request
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a pull request on GitHub.
 
 ## License
 

@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((err) => {
         setLoading(false);
+        console.log(err);
         if (err.status === 409) {
           setErrors({
             ...errors,
