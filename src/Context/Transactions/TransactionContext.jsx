@@ -22,11 +22,8 @@ export const TransactionProvider = ({ children }) => {
       if (JSON.stringify(newTransactions) !== JSON.stringify(transactions)) {
         setTransactions(newTransactions);
       }
-    } catch (_) {
-      toast.info("No transactions found.", {
-        autoClose: 2500,
-        pauseOnHover: false,
-      });
+    } catch (error) {
+      console.error(error);
     }
   };
 
