@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         });
       })
       .catch((err) => {
+        setLoading(false);
         if (err.status === 409) {
           setErrors({
             ...errors,
