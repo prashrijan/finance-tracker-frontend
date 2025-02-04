@@ -8,11 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { registerUser, errors, setErrors, loading } = useAuth();
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    setErrors({});
-  }, []);
 
   const [formData, setFormData] = useState({
     userName: "",
@@ -55,8 +50,8 @@ const SignUp = () => {
       await formValidationSchema.validate(formData, {
         abortEarly: false,
       });
-      setErrors({});
       registerUser(formData);
+      setErrors({});
 
       setFormData({
         userName: "",
@@ -74,6 +69,8 @@ const SignUp = () => {
       setErrors(newErrors);
     }
   };
+
+  console.log(errors);
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center h-full  bg-gray-900 text-white p-5 gap-4">

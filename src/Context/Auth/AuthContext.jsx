@@ -19,12 +19,12 @@ export const AuthProvider = ({ children }) => {
     axios
       .post(`${endpoint}/users/register`, user)
       .then(() => {
-        setErrors({});
         setLoading(false);
         toast.success("Account created successfully.", {
           autoClose: 2500,
           pauseOnHover: false,
         });
+        setErrors({});
       })
       .catch((err) => {
         setLoading(false);
