@@ -13,21 +13,23 @@ import DoughnutChart from "./Components/Charts/Doughnut";
 import IncomeLineChart from "./Components/Charts/IncomeLineChart";
 import ExpenseLineChart from "./Components/Charts/ExpenseLineChart";
 import DeleteModal from "./Components/Modal/DeleteModal";
+import ResetPassword from "./Pages/Auth/ResetPassowrd";
 
 export {
-  HomePage,
-  AboutUs,
-  ContactUs,
-  Footer,
-  NavBar,
-  SkeletonLoader,
-  SignUp,
-  Login,
-  Dashboard,
-  TransactionsPage,
-  BarGraph,
-  DoughnutChart,
-  IncomeLineChart,
-  ExpenseLineChart,
-  DeleteModal,
+    HomePage,
+    AboutUs,
+    ContactUs,
+    Footer,
+    NavBar,
+    SkeletonLoader,
+    SignUp,
+    Login,
+    Dashboard,
+    TransactionsPage,
+    BarGraph,
+    DoughnutChart,
+    IncomeLineChart,
+    ExpenseLineChart,
+    DeleteModal,
+    ResetPassword,
 };
